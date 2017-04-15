@@ -1,0 +1,12 @@
+<html>
+    <body>
+        <span id="date">${ 'today' :: translate(date: date, time : time)}</span>
+        <span id="without-time">${ 'today' :: translate(date: date)}</span>
+
+        <ul id="menu">
+            <li e-each="menu" e-text="{$data : 'menu.label-' + id, $transform : 'translate'}"></li>
+        </ul>
+
+        <span id="unexisting">${ 'unexisting' :: translate }</span>
+    </body>
+</html>

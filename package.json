@@ -1,0 +1,46 @@
+{
+  "name": "emv-translate",
+  "version": "1.0.0",
+  "description": "EMV transformation to display translated keys in DOM",
+  "main": "lib/emv-translate.js",
+  "author": "Elvyrra S.A.S",
+  "license": "ISC",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "rm -Rf coverage && istanbul --include-all-sources --root=./lib cover _mocha",
+    "lint": "eslint ./lib/emv.js",
+    "build-version": "mkdir -p dist &&  cp ./lib/emv-translate.js ./dist && sed -i \"s/{{ version }}/${npm_package_version}/g\" ./dist/emv-translate.js",
+    "build-es5": "babel ./dist/emv-translate.js --out-file ./dist/emv-translate-es5.js --presets=latest",
+    "uglify": "./node_modules/.bin/uglifyjs --mangle --compress --comments --output ./dist/emv-translate.min.js ./dist/emv-translate.js",
+    "uglify-es5": "./node_modules/.bin/uglifyjs --mangle --compress --comments --output ./dist/emv-translate-es5.min.js ./dist/emv-translate-es5.js",
+    "build": "npm run lint && npm run build-version && npm run build-es5 && npm run uglify && npm run uglify-es5",
+    "commit": "commit-wizard"
+  },
+  "dependencies" : {
+    "emv" : "git+https://github.com/elvyrra/emv.git#v3.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-env": "^1.1.8",
+    "babel-preset-latest": "^6.16.0",
+    "chai": "^3.5.0",
+    "chai-as-promised": "^6.0.0",
+    "chai-cheerio": "^1.0.0",
+    "chai-jquery": "^2.0.0",
+    "cheerio": "^0.22.0",
+    "html-element": "^2.1.1",
+    "istanbul": "^0.4.5",
+    "istanbul-harmony": "^0.3.16",
+    "jsdom": "^9.5.0",
+    "mocha": "^3.0.0",
+    "pre-git": "^3.10.0",
+    "uglify-js-harmony": "^2.6.2"
+  },
+  "config": {
+    "pre-git": {
+      "commit-msg": "simple"
+    }
+  }
+}

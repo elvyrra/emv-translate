@@ -1,0 +1,43 @@
+<html>
+    <body>
+        <span>${'my.key.down' :: translate(date:date)}</span>
+
+        <div>${EMV.translate('my.key.up')}</div>
+
+        <ul id="menu">
+            <li e-each="menu" e-text="{$data : 'menu.label-' + id, $transform : 'translate'}"></li>
+        </ul>
+
+        <script type="text/javascript" src="../../../emv/lib/emv.js"></script>
+        <script type="text/javascript" src="../lib/emv-translate.js"></script>
+
+        <script>
+            const emv = new EMV({
+                date : '01/01/1980',
+                time : '00:00',
+                menu : [
+                    {id : 1},
+                    {id : 2}
+                ]
+            });
+
+            EMV.config.translate = {
+                fr : {
+                    my : {
+                        key : {
+                            up : 'Salut',
+                            down : 'Nous sommes le {date}, il est {time}'
+                        }
+                    },
+                    menu : {
+                        'label-1' : 'menu1',
+                        'label-2' : 'menu2'
+                    }
+                }
+            };
+
+            emv.$apply();
+
+        </script>
+    </body>
+</html>
